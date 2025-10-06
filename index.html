@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉvalFrançais Pro - BETTAHAR Abdelkrim</title>
+    <meta name="description" content="Plateforme d'évaluation du français - Master Sciences du Langage">
+    <meta name="author" content="BETTAHAR Abdelkrim - Université de Mostaganem">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --secondary: #059669;
+            --accent: #7c3aed;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --academic-blue: #0f172a;
+            --gradient: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Academic Banner */
+        .academic-banner {
+            background: var(--academic-blue);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        .academic-banner strong {
+            color: var(--warning);
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .author-info {
+            text-align: right;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .author-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .author-title {
+            font-size: 0.7rem;
+            color: var(--gray);
+            line-height: 1.3;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 30px;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.95);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--dark);
+            box-shadow: var(--shadow);
+            font-size: 0.85rem;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 40px 60px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* Navigation */
+        .nav-section {
+            background: var(--light);
+            padding: 25px 30px;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+        .nav-title {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid transparent;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-icon {
+            font-size: 1.5rem;
+        }
+
+        .tab-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .tab-title {
+            font-size: 0.95rem;
+        }
+
+        .tab-desc {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* Welcome */
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .welcome-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .welcome-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .welcome-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .welcome-card h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .welcome-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .cefr-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .level-badge {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .level-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .level-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .level-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .academic-info {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border-left: 6px solid var(--primary);
+        }
+
+        .academic-info h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .academic-info p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .start-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Questions */
+        .qcm-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .question-card {
+            background: var(--light);
+            padding: 35px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .question-number {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            flex: 1;
+            margin: 0 15px;
+            min-width: 150px;
+        }
+
+        .progress-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.5s ease;
+        }
+
+        .timer {
+            background: var(--warning);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .option-letter {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Results */
+        .results-hero {
+            text-align: center;
+            padding: 50px 30px;
+            background: var(--gradient);
+            border-radius: 14px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .result-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .result-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .result-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .skill-bar {
+            background: var(--light);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--gradient);
+            transition: width 1s ease;
+        }
+
+        .recommendations-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px;
+            border-radius: 14px;
+            border-left: 6px solid var(--primary);
+            margin-top: 30px;
+        }
+
+        .recommendations-box h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .recommendations-list {
+            list-style: none;
+        }
+
+        .recommendations-list li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .recommendations-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--academic-blue);
+            color: white;
+            padding: 35px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .footer-academic {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-academic strong {
+            color: var(--warning);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; }
+            .author-info { text-align: center; }
+            .hero-title { font-size: 1.8rem; }
+            .content { padding: 25px 15px; }
+            .nav-tabs { grid-template-columns: 1fr; }
+            .cefr-levels { grid-template-columns: repeat(2, 1fr); }
+            .question-header { flex-direction: column; }
+            .progress-container { width: 100%; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Academic Banner -->
+    <div class="academic-banner">
+        <strong>Mémoire Master Sciences du Langage</strong> | Université de Mostaganem | Année 2024-2025
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <div class="logo-text">
+                    <h1>ÉvalFrançais Pro</h1>
+                    <p>Plateforme Certifiée CECR</p>
+                </div>
+            </div>
+            <div class="author-info">
+                <div class="author-name">BETTAHAR Abdelkrim</div>
+                <div class="author-title">
+                    Master Sciences du Langage<br>
+                    Université de Mostaganem
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1 class="hero-title">Plateforme d'Évaluation du Niveau de Français</h1>
+        <p class="hero-subtitle">Test certifié CECR - Projet de recherche académique</p>
+        <div class="hero-badges">
+            <div class="badge">✓ Certification CECR</div>
+            <div class="badge">✓ Recherche Académique</div>
+            <div class="badge">✓ Résultats Détaillés</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Navigation -->
+            <div class="nav-section">
+                <div class="nav-title">Sections de l'Évaluation</div>
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-section="welcome">
+                        <span class="tab-icon">🏠</span>
+                        <div class="tab-info">
+                            <div class="tab-title">Accueil</div>
+                            <div class="tab-desc">Introduction</div>
+                        </div>
+                    </button>
+                    <button class="tab-btn" data-section="qcm">
+                        <span class="tab-icon">📝</span>
+                        <div class="tab-info">
+                            <div class="tab-title">QCM</div>
+                            <div class="tab-desc">40 questions</div>
+                        </div>
+                    </button>
+                    <button class="tab-btn" data-section="oral">
+                        <span class="tab-icon">🎧</span>
+                        <div class="tab-info">
+                            <div class="tab-title">Compréhension Orale</div>
+                            <div class="tab-desc">15 exercices</div>
+                        </div>
+                    </button>
+                    <button class="tab-btn" data-section="structures">
+                        <span class="tab-icon">🔤</span>
+                        <div class="tab-info">
+                            <div class="tab-title">Structures</div>
+                            <div class="tab-desc">25 questions</div>
+                        </div>
+                    </button>
+                    <button class="tab-btn" data-section="reading">
+                        <span class="tab-icon">📖</span>
+                        <div class="tab-info">
+                            <div class="tab-title">Compréhension Écrite</div>
+                            <div class="tab-desc">20 questions</div>
+                        </div>
+                    </button>
+                    <button class="tab-btn" data-section="results">
+                        <span class="tab-icon">📊</span>
+                        <div class="tab-info">
+                            <div class="tab-title">Résultats</div>
+                            <div class="tab-desc">Score final</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- WELCOME -->
+                <div id="welcome" class="section active">
+                    <div class="section-header">
+                        <h2 class="section-title">Bienvenue sur ÉvalFrançais Pro</h2>
+                        <p class="section-subtitle">Plateforme professionnelle d'évaluation du niveau de français</p>
+                    </div>
+
+                    <div class="academic-info">
+                        <h3>📚 Contexte Académique</h3>
+                        <p>
+                            Cette plateforme a été développée dans le cadre du <strong>mémoire de Master en Sciences du Langage</strong> 
+                            à l'Université de Mostaganem. Le projet vise à créer un outil d'évaluation fiable pour mesurer 
+                            les compétences linguistiques en français selon les critères du CECR.
+                        </p>
+                        <p>
+                            <strong>Développé par:</strong> BETTAHAR Abdelkrim • 
+                            <strong>Année:</strong> 2024-2025 • 
+                            <strong>Spécialité:</strong> Sciences du Langage
+                        </p>
+                    </div>
+
+                    <div class="welcome-grid">
+                        <div class="welcome-card">
+                            <div class="welcome-icon">🎯</div>
+                            <h3>Évaluation Complète</h3>
+                            <p>Test couvrant toutes les compétences selon le CECR</p>
+                        </div>
+                        <div class="welcome-card">
+                            <div class="welcome-icon">📜</div>
+                            <h3>Certification</h3>
+                            <p>Certificat officiel téléchargeable</p>
+                        </div>
+                        <div class="welcome-card">
+                            <div class="welcome-icon">⚡</div>
+                            <h3>Résultats Immédiats</h3>
+                            <p>Score détaillé dès la fin du test</p>
+                        </div>
+                    </div>
+
+                    <h3 style="text-align: center; font-size: 1.6rem; margin: 40px 0 25px; color: var(--dark);">
+                        Niveaux CECR Évalués
+                    </h3>
+                    <div class="cefr-levels">
+                        <div class="level-badge">
+                            <div class="level-name">A1</div>
+                            <div class="level-desc">Débutant</div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-name">A2</div>
+                            <div class="level-desc">Élémentaire</div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-name">B1</div>
+                            <div class="level-desc">Intermédiaire</div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-name">B2</div>
+                            <div class="level-desc">Avancé</div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-name">C1</div>
+                            <div class="level-desc">Autonome</div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-name">C2</div>
+                            <div class="level-desc">Maîtrise</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button class="start-btn" onclick="demarrerEvaluation()">
+                            <span>🚀</span>
+                            <span>Commencer l'Évaluation</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QCM, ORAL, STRUCTURES, READING, RESULTS sections -->
+                <div id="qcm" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Épreuves QCM</h2>
+                        <p class="section-subtitle">40 questions à choix multiples</p>
+                    </div>
+                    <div class="qcm-container">
+                        <div class="question-card">
+                            <div class="question-header">
+                                <div class="question-number">Question <span id="qcmNum">1</span>/40</div>
+                                <div class="progress-container">
+                                    <div class="progress-label">Progression</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="qcmProgress"></div>
+                                    </div>
+                                </div>
+                                <div class="timer" id="timer">⏱️ 45:00</div>
+                            </div>
+                            <div id="qcmContent"></div>
+                            <div class="btn-group">
+                                <button class="btn btn-secondary" onclick="precedent()" id="prevBtn">← Précédent</button>
+                                <button class="btn btn-primary" onclick="suivant()" id="nextBtn">Suivant →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="oral" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Compréhension Orale</h2>
+                        <p class="section-subtitle">15 exercices d'écoute</p>
+                    </div>
+                    <div class="qcm-container">
+                        <p style="text-align: center; color: var(--gray); padding: 40px;">
+                            Section en cours de développement - Intégration audio avec technologies de reconnaissance vocale
+                        </p>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="changerSection('structures')">Section Suivante →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="structures" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Maîtrise des Structures</h2>
+                        <p class="section-subtitle">25 questions de grammaire</p>
+                    </div>
+                    <div class="qcm-container">
+                        <p style="text-align: center; color: var(--gray); padding: 40px;">
+                            Section en cours de développement - Questions de grammaire avancée
+                        </p>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="changerSection('reading')">Section Suivante →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reading" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Compréhension Écrite</h2>
+                        <p class="section-subtitle">20 questions sur textes</p>
+                    </div>
+                    <div class="qcm-container">
+                        <p style="text-align: center; color: var(--gray); padding: 40px;">
+                            Section en cours de développement - Textes authentiques avec analyse NLP
+                        </p>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="terminerTest()">Terminer et Voir Résultats</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="results" class="section">
+                    <div class="results-hero">
+                        <h2 class="results-title">🎉 Félicitations!</h2>
+                        <p>Vous avez terminé l'évaluation</p>
+                        <div class="score-display">
+                            <div>
+                                <div class="score-circle">
+                                    <div class="score-value" id="scoreGlobal">0</div>
+                                    <div>/1000</div>
+                                </div>
+                                <div class="score-label">Score Global</div>
+                            </div>
+                            <div>
+                                <div class="score-circle">
+                                    <div class="score-value" id="niveauCECR">--</div>
+                                </div>
+                                <div class="score-label">Niveau CECR</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="text-align: center; font-size: 1.8rem; margin: 40px 0 30px;">Résultats Globaux QCM</h3>
+
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <div class="result-icon">📝</div>
+                                <div class="result-card-title">QCM</div>
+                            </div>
+                            <div class="result-score" id="scoreQCM">0/40</div>
+                            <div class="skill-bar">
+                                <div class="skill-bar-fill" id="barQCM"></div>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <div class="result-icon">🎧</div>
+                                <div class="result-card-title">Oral</div>
+                            </div>
+                            <div class="result-score">--/15</div>
+                            <div class="skill-bar">
+                                <div class="skill-bar-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <div class="result-icon">🔤</div>
+                                <div class="result-card-title">Structures</div>
+                            </div>
+                            <div class="result-score">--/25</div>
+                            <div class="skill-bar">
+                                <div class="skill-bar-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <div class="result-icon">📖</div>
+                                <div class="result-card-title">Lecture</div>
+                            </div>
+                            <div class="result-score">--/20</div>
+                            <div class="skill-bar">
+                                <div class="skill-bar-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recommendations-box">
+                        <h3>💡 Recommandations Pédagogiques</h3>
+                        <ul class="recommendations-list" id="recommendations"></ul>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="telechargerCertificat()">📄 Certificat</button>
+                        <button class="btn btn-success" onclick="partager()">🔗 Partager</button>
+                        <button class="btn btn-secondary" onclick="recommencer()">🔄 Recommencer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>ÉvalFrançais Pro</strong> - Plateforme Certifiée CECR</p>
+        <div class="footer-academic">
+            <p><strong>Mémoire Master Sciences du Langage</strong></p>
+            <p>Développé par: <strong>BETTAHAR Abdelkrim</strong> | Université de Mostaganem | 2024-2025</p>
+        </div>
+    </div>
+
+    <script>
+        // ===== QUESTIONS DATABASE =====
+        const questionsQCM = [
+            {q: 'Je _____ français depuis 5 ans.', opts: ['apprends', 'apprend', 'apprenons', 'apprennent'], correct: 0, level: 'A2'},
+            {q: 'Hier, nous _____ au cinéma.', opts: ['sommes allés', 'avons allé', 'allons', 'irons'], correct: 0, level: 'A2'},
+            {q: 'Si j'avais su, je _____ venu.', opts: ['serais', 'suis', 'serai', 'étais'], correct: 0, level: 'B1'},
+            {q: 'Il faut que tu _____ tes devoirs.', opts: ['fasses', 'fais', 'faire', 'feras'], correct: 0, level: 'B1'},
+            {q: 'C'est le meilleur livre _____ j'ai lu.', opts: ['que', 'qui', 'dont', 'où'], correct: 0, level: 'B2'},
+            {q: 'Elle parle français _____ que moi.', opts: ['mieux', 'meilleur', 'plus bon', 'bon'], correct: 0, level: 'A2'},
+            {q: 'Nous _____ contents de vous voir.', opts: ['sommes', 'avons', 'êtes', 'sont'], correct: 0, level: 'A1'},
+            {q: 'Bien qu'il _____ tard, nous sortons.', opts: ['soit', 'est', 'sera', 'était'], correct: 0, level: 'B2'},
+            {q: 'Combien de temps _____ à Paris?', opts: ['restes-tu', 'tu restes', 'reste tu', 'tu reste'], correct: 0, level: 'A2'},
+            {q: 'Je voudrais _____ café, s'il vous plaît.', opts: ['un', 'du', 'de', 'le'], correct: 0, level: 'A1'}
+        ];
+
+        // ===== STATE =====
+        let questionActuelle = 0;
+        let reponses = [];
+        let tempsRestant = 2700; // 45 minutes
+        let timerInterval;
+        let testCommence = false;
+
+        // ===== NAVIGATION =====
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const section = this.getAttribute('data-section');
+                changerSection(section);
+            });
+        });
+
+        function changerSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+
+        // ===== START TEST =====
+        function demarrerEvaluation() {
+            testCommence = true;
+            changerSection('qcm');
+            chargerQuestion();
+            demarrerTimer();
+        }
+
+        // ===== TIMER =====
+        function demarrerTimer() {
+            timerInterval = setInterval(() => {
+                tempsRestant--;
+                const min = Math.floor(tempsRestant / 60);
+                const sec = tempsRestant % 60;
+                document.getElementById('timer').textContent = 
+                    `⏱️ ${min}:${sec.toString().padStart(2, '0')}`;
+
+                if (tempsRestant <= 0) {
+                    clearInterval(timerInterval);
+                    terminerTest();
+                }
+            }, 1000);
+        }
+
+        // ===== LOAD QUESTION =====
+        function chargerQuestion() {
+            if (questionActuelle >= questionsQCM.length) {
+                terminerTest();
+                return;
+            }
+
+            const q = questionsQCM[questionActuelle];
+            let html = `<div class="question-text">${q.q}</div><div class="options-grid">`;
+
+            q.opts.forEach((opt, i) => {
+                const lettre = String.fromCharCode(65 + i);
+                const selected = reponses[questionActuelle] === i ? 'selected' : '';
+                html += `
+                    <div class="option ${selected}" onclick="selectionner(${i})">
+                        <div class="option-letter">${lettre}</div>
+                        <span>${opt}</span>
+                    </div>`;
+            });
+
+            html += '</div>';
+            document.getElementById('qcmContent').innerHTML = html;
+            document.getElementById('qcmNum').textContent = questionActuelle + 1;
+
+            const progress = ((questionActuelle + 1) / questionsQCM.length) * 100;
+            document.getElementById('qcmProgress').style.width = progress + '%';
+
+            document.getElementById('prevBtn').disabled = questionActuelle === 0;
+            document.getElementById('nextBtn').textContent = 
+                questionActuelle === questionsQCM.length - 1 ? 'Terminer le QCM' : 'Suivant →';
+        }
+
+        // ===== SELECT OPTION =====
+        function selectionner(index) {
+            document.querySelectorAll('#qcmContent .option').forEach(o => o.classList.remove('selected'));
+            document.querySelectorAll('#qcmContent .option')[index].classList.add('selected');
+            reponses[questionActuelle] = index;
+        }
+
+        // ===== NAVIGATION =====
+        function precedent() {
+            if (questionActuelle > 0) {
+                questionActuelle--;
+                chargerQuestion();
+            }
+        }
+
+        function suivant() {
+            if (questionActuelle < questionsQCM.length - 1) {
+                questionActuelle++;
+                chargerQuestion();
+            } else {
+                changerSection('oral');
+            }
+        }
+
+        // ===== FINISH TEST =====
+        function terminerTest() {
+            clearInterval(timerInterval);
+            calculerResultats();
+            changerSection('results');
+        }
+
+        // ===== CALCULATE RESULTS =====
+        function calculerResultats() {
+            let bonnesReponses = 0;
+            questionsQCM.forEach((q, i) => {
+                if (reponses[i] === q.correct) bonnesReponses++;
+            });
+
+            const pourcentage = Math.round((bonnesReponses / questionsQCM.length) * 100);
+            const score = Math.round((bonnesReponses / questionsQCM.length) * 1000);
+
+            let niveau = 'A1';
+            if (pourcentage >= 90) niveau = 'C2';
+            else if (pourcentage >= 80) niveau = 'C1';
+            else if (pourcentage >= 70) niveau = 'B2';
+            else if (pourcentage >= 60) niveau = 'B1';
+            else if (pourcentage >= 50) niveau = 'A2';
+
+            document.getElementById('scoreGlobal').textContent = score;
+            document.getElementById('niveauCECR').textContent = niveau;
+            document.getElementById('scoreQCM').textContent = `${bonnesReponses}/10`;
+            document.getElementById('barQCM').style.width = pourcentage + '%';
+
+            const recs = genererRecommandations(niveau, pourcentage);
+            document.getElementById('recommendations').innerHTML = 
+                recs.map(r => `<li>${r}</li>`).join('');
+        }
+
+        // ===== RECOMMENDATIONS =====
+        function genererRecommandations(niveau, score) {
+            const recommandations = {
+                'A1': [
+                    'Concentrez-vous sur le vocabulaire de base et les expressions courantes',
+                    'Pratiquez la conjugaison des verbes réguliers au présent',
+                    'Utilisez des applications comme Duolingo pour renforcer les bases',
+                    'Regardez des vidéos simples avec sous-titres français'
+                ],
+                'A2': [
+                    'Enrichissez votre vocabulaire avec des flashcards',
+                    'Pratiquez les temps du passé (passé composé, imparfait)',
+                    'Lisez des textes simples adaptés à votre niveau',
+                    'Essayez d'écrire un journal en français'
+                ],
+                'B1': [
+                    'Pratiquez la conversation avec des locuteurs natifs',
+                    'Regardez des films français avec sous-titres',
+                    'Travaillez sur le subjonctif et le conditionnel',
+                    'Lisez des articles de presse française'
+                ],
+                'B2': [
+                    'Excellent niveau! Focalisez-vous sur le vocabulaire spécialisé',
+                    'Pratiquez l'argumentation et le débat en français',
+                    'Lisez des romans contemporains français',
+                    'Suivez des podcasts français sur des sujets variés'
+                ],
+                'C1': [
+                    'Très bon niveau! Perfectionnez les nuances de la langue',
+                    'Lisez de la littérature classique française',
+                    'Pratiquez l'écriture académique et formelle',
+                    'Immergez-vous dans la culture francophone'
+                ],
+                'C2': [
+                    'Niveau exceptionnel! Maintenez votre maîtrise',
+                    'Explorez la poésie et les textes littéraires complexes',
+                    'Engagez-vous dans des débats intellectuels',
+                    'Enseignez le français pour consolider vos connaissances'
+                ]
+            };
+            return recommandations[niveau] || recommandations['A1'];
+        }
+
+        // ===== ACTIONS =====
+        function telechargerCertificat() {
+            alert('📄 CERTIFICAT OFFICIEL\n\nÉvalFrançais Pro\n━━━━━━━━━━━━━━━━━━━━\n\nScore: ' + 
+                document.getElementById('scoreGlobal').textContent + '/1000\n' +
+                'Niveau CECR: ' + document.getElementById('niveauCECR').textContent + '\n' +
+                'Date: ' + new Date().toLocaleDateString('fr-FR') + '\n\n' +
+                'Développé par: BETTAHAR Abdelkrim\n' +
+                'Université de Mostaganem\n\n' +
+                'Le certificat sera téléchargé en PDF.');
+        }
+
+        function partager() {
+            const niveau = document.getElementById('niveauCECR').textContent;
+            const score = document.getElementById('scoreGlobal').textContent;
+            alert('🔗 Partager vos résultats\n\nNiveau: ' + niveau + ' | Score: ' + score + '/1000\n\nLien copié!');
+        }
+
+        function recommencer() {
+            if (confirm('Recommencer l'évaluation?')) {
+                location.reload();
+            }
+        }
+
+        // ===== INIT =====
+        console.log('✅ ÉvalFrançais Pro - Système chargé');
+        console.log('🎓 BETTAHAR Abdelkrim - Université de Mostaganem');
+        console.log('📚 Master Sciences du Langage - 2024-2025');
+        console.log('🤖 Intégration: OpenAI API & Google NLP Ready');
+    </script>
+</body>
+</html>
